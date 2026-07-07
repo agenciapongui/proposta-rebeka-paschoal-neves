@@ -721,6 +721,7 @@
     color: var(--orange);
     font-weight: 400;
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
   input[type="range"] {
@@ -813,6 +814,7 @@
     color: var(--ink);
     font-weight: 400;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 
   .calc-result-row.highlight .calc-result-label { color: var(--green); }
@@ -947,6 +949,7 @@
     color: var(--ink);
     font-weight: 500;
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
   .payment-conditions {
@@ -1054,16 +1057,17 @@
   }
 
   .scope-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
+    position: relative;
+    padding-left: 32px;
     font-size: 15px;
     color: var(--ink);
     line-height: 1.5;
   }
 
   .scope-list li::before {
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 2px;
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -1073,7 +1077,6 @@
     font-family: var(--mono);
     font-size: 10px;
     font-weight: 700;
-    margin-top: 2px;
   }
 
   .scope-col.included .scope-list li::before {
@@ -1307,15 +1310,64 @@
     transform: translateY(0);
   }
 
-  /* =========== RESPONSIVE HERO META =========== */
+  /* =========== MOBILE =========== */
   @media (max-width: 640px) {
-    .hero-meta { gap: 32px; }
-    .hero { padding: 120px 0 60px; }
+    .hero { padding: 110px 0 60px; }
     section { padding: 80px 0; }
     .section-header { margin-bottom: 48px; }
+
+    /* quebras de linha manuais só fazem sentido no desktop */
+    .hero h1 br, .section-title br, .cta-title br { display: none; }
+    .hero h1 { font-size: clamp(38px, 11.5vw, 48px); }
+    .cta-title { font-size: clamp(34px, 10.5vw, 44px); }
+    .section-intro { font-size: 16px; }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 20px;
+      padding-top: 32px;
+    }
+    .hero-meta-value { font-size: 17px; }
+
+    .territory-map { padding: 28px 18px; overflow-x: auto; }
+    .territory-table th,
+    .territory-table td { padding: 12px 6px; font-size: 13px; }
+    .territory-table th { font-size: 9px; letter-spacing: 0.08em; }
+    .territory-table td:first-child { font-size: 15px; }
+    .territory-table td:first-child span {
+      display: block;
+      margin-left: 0 !important;
+      margin-top: 3px;
+    }
+    .territory-table .comp-zero,
+    .territory-table .comp-low { font-size: 10px; letter-spacing: 0.06em; }
+
     .niche-card { padding: 32px 24px; }
-    .price-card { padding: 36px 28px; }
-    .calc-wrap { padding: 36px 24px; }
+    .niche-card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .niche-card-title { font-size: 23px; }
+
+    .calc-wrap { padding: 36px 22px; }
+    .calc-control-value { font-size: 22px; }
+    .calc-result { padding: 26px 18px; }
+    .calc-result-value { font-size: 19px; }
+    .calc-result-row.highlight { padding: 18px; margin: 8px -18px -8px; }
+    .calc-result-row.highlight .calc-result-value { font-size: 26px; }
+
+    .price-card { padding: 36px 24px; }
+    .price-card-title { font-size: 30px; }
+    .price-line-value { font-size: 20px; }
+    .price-total { padding: 22px 20px; }
+    .price-total-value { font-size: 28px; }
+    .payment-condition { padding: 24px 20px; gap: 16px; }
+
+    .scope-col { padding: 36px 24px; }
+    .future-quote { padding: 36px 0 36px 20px; }
+    .diag-cell-num { font-size: 32px; }
   }
   .accept-btn {
     display: inline-flex; align-items: center; gap: 12px;
@@ -1342,7 +1394,7 @@
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-kicker">Proposta exclusiva · Escritório da Dra. Rebeka Paschoal Neves</div>
-    <h1>Um Meta Ads<br><em>calibrado</em> pra crescer<br>em Natal.</h1>
+    <h1>Um Meta Ads <br><em>calibrado</em> pra crescer <br>em Natal.</h1>
     <p class="hero-sub">Um plano de Meta Ads desenhado por quem só trabalha com advocacia. A prioridade que você pediu, feita do jeito certo: começando pelo nicho de maior retorno e recuperando a demanda de trânsito sem queimar verba.</p>
 
     <div class="hero-meta">
@@ -1376,7 +1428,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">01 · Diagnóstico</div>
-      <h2 class="section-title">O que <em>você</em> me disse<br>na nossa primeira conversa.</h2>
+      <h2 class="section-title">O que <em>você</em> me disse <br>na nossa primeira conversa.</h2>
       <p class="section-intro">
         Esta proposta nasce diretamente do que você me passou sobre o
         escritório da Rebeka. Cada decisão aqui responde a um ponto específico
@@ -1441,7 +1493,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">02 · Território</div>
-      <h2 class="section-title">O Rio Grande do Norte é<br>uma <em>praça aberta</em> no Meta jurídico.</h2>
+      <h2 class="section-title">O Rio Grande do Norte é <br>uma <em>praça aberta</em> no Meta jurídico.</h2>
       <p class="section-intro">
         Com sede em Natal, o escritório alcança um estado de 3,45 milhões de
         habitantes, 1,72 milhão de veículos e renda média de R$ 1.819/mês — com
@@ -1541,7 +1593,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">03 · Estratégia</div>
-      <h2 class="section-title">Por que começar<br>pelo <em>bancário</em>.</h2>
+      <h2 class="section-title">Por que começar <br>pelo <em>bancário</em>.</h2>
       <p class="section-intro">
         No Meta, o bancário puxa a captação fria (ticket judicial que justifica
         a verba). O trânsito, que segue rodando no Google com o gestor de vocês,
@@ -1626,7 +1678,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">04 · Projeção</div>
-      <h2 class="section-title">Quanto isso pode gerar<br>de <em>retorno real</em>.</h2>
+      <h2 class="section-title">Quanto isso pode gerar <br>de <em>retorno real</em>.</h2>
       <p class="section-intro">
         Projeção do nicho de captação (bancário/revisão) na verba escalada
         do mês 2. Mexa nos sliders abaixo para ver como os números se comportam.
@@ -1715,7 +1767,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">05 · Investimento</div>
-      <h2 class="section-title">Seu <em>investimento</em>,<br>com condições que respeitam<br>o momento financeiro.</h2>
+      <h2 class="section-title">Seu <em>investimento</em>, <br>com condições que respeitam <br>o momento financeiro.</h2>
       <p class="section-intro">
         Investimento enxuto pra começar e desenhado pra escalar a partir do
         mês 2. E o mais importante: três condições de pagamento pra você começar
@@ -1726,7 +1778,7 @@
     <div class="pricing-grid">
       <div class="price-card reveal">
         <div class="price-card-kicker">Plano Meta Ads · Bancário + Trânsito</div>
-        <div class="price-card-title">Composição<br>do investimento.</div>
+        <div class="price-card-title">Composição <br>do investimento.</div>
 
         <div class="price-line">
           <div class="price-line-label">
@@ -1809,7 +1861,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">06 · Escopo</div>
-      <h2 class="section-title">O que <em>está</em><br>(e o que <em>não está</em>)<br>neste plano.</h2>
+      <h2 class="section-title">O que <em>está</em> <br>(e o que <em>não está</em>) <br>neste plano.</h2>
       <p class="section-intro">
         Total transparência sobre o que entra e o que fica de fora neste
         plano de Meta Ads. Sem letra miúda, sem surpresa depois.
@@ -1866,7 +1918,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="section-num">07 · O próximo passo</div>
-      <h2 class="section-title">Onde <em>isso chega</em><br>nos próximos meses.</h2>
+      <h2 class="section-title">Onde <em>isso chega</em> <br>nos próximos meses.</h2>
     </div>
 
     <div class="future-narrative">
@@ -1925,7 +1977,7 @@
 <section class="cta-section">
   <div class="container cta-inner">
     <div class="cta-kicker">Vamos começar?</div>
-    <h2 class="cta-title">Uma parceria feita<br>pro momento <em>certo</em>.</h2>
+    <h2 class="cta-title">Uma parceria feita <br>pro momento <em>certo</em>.</h2>
     <p class="cta-sub">
       Basta clicar no botão abaixo pra confirmar o aceite. A partir daí,
       assinamos o contrato, agendamos as reuniões de onboarding e em até
